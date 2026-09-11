@@ -3,69 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Uppu Sai Srikar | Embedded Systems & Software Engineer</title>
+  <title>Sai Srikar | Embedded Systems & Firmware Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display,-apple-system,BlinkMacSystemFont,Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --border: #30363d;
-      --accent: #58a6ff;
-      --accent-hover: #79c0ff;
-      --text: #c9d1d9;
-      --text-muted: #8b949e;
-      --heading: #f0f6fc;
-      --tag-bg: #1f2937;
+      --bg: #000000;
+      --card-bg: rgba(22, 22, 24, 0.75);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-hover-border: rgba(255, 255, 255, 0.35);
+      --accent: #2997ff;
+      --accent-glow: rgba(41, 151, 255, 0.35);
+      --text-main: #f5f5f7;
+      --text-sub: #86868b;
+      --pill-bg: rgba(255, 255, 255, 0.06);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
       background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.2s;
+    /* Ambient Background Glow */
+    .glow-orb {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, rgba(138, 43, 226, 0.08) 50%, rgba(0, 0, 0, 0) 80%);
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
     }
 
-    a:hover {
-      color: var(--accent-hover);
-    }
-
+    /* Floating Apple-style Navigation */
     header {
       position: sticky;
-      top: 0;
-      background: rgba(13, 17, 23, 0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      top: 16px;
       z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 1rem;
     }
 
     nav {
-      max-width: 1000px;
-      margin: 0 auto;
+      background: rgba(22, 22, 24, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--card-border);
+      border-radius: 980px;
+      padding: 0.6rem 1.6rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.5rem;
+      gap: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    .logo {
+    .nav-logo {
+      font-size: 0.95rem;
       font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--heading);
-      font-family: 'Fira Code', monospace;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
     }
 
     .nav-links {
@@ -75,399 +86,413 @@
     }
 
     .nav-links a {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--text-sub);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      transition: color 0.2s;
     }
 
     .nav-links a:hover {
-      color: var(--heading);
+      color: var(--text-main);
     }
 
+    /* Layout Container */
     .container {
-      max-width: 1000px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: 4rem 1.5rem;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Hero */
+    /* Hero Section */
     .hero {
-      padding: 4rem 0 3rem;
+      text-align: center;
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      background: var(--pill-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 980px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
-      color: var(--heading);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero .tagline {
-      font-size: 1.25rem;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      font-family: 'Fira Code', monospace;
-    }
-
-    .hero p {
-      max-width: 650px;
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.65rem 1.25rem;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: 0.2s all;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #0d1117;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      color: #0d1117;
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      color: var(--heading);
-      background: var(--card-bg);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent);
-    }
-
-    /* Sections */
-    section {
-      margin-bottom: 4rem;
-    }
-
-    h2 {
-      font-size: 1.6rem;
-      color: var(--heading);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    h2::after {
-      content: "";
-      height: 1px;
-      background: var(--border);
-      flex-grow: 1;
-    }
-
-    /* Skills Grid */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .skill-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 1.2rem;
-      border-radius: 8px;
-    }
-
-    .skill-card h3 {
-      font-size: 1rem;
-      color: var(--heading);
-      margin-bottom: 0.6rem;
-      font-family: 'Fira Code', monospace;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .tag {
-      font-size: 0.75rem;
-      background: var(--tag-bg);
-      color: var(--text);
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
-
-    /* Projects Grid */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-    }
-
-    .project-card h3 {
-      color: var(--heading);
-      font-size: 1.15rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      background: linear-gradient(180deg, #ffffff 30%, #86868b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 1.2rem;
     }
 
-    .project-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
+    .hero p {
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: var(--text-sub);
+      font-weight: 400;
     }
 
-    .project-links {
+    .cta-group {
       display: flex;
+      justify-content: center;
       gap: 1rem;
-      font-size: 0.85rem;
     }
 
-    /* Achievements */
-    .timeline {
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 980px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-apple {
+      background: #0071e3;
+      color: #fff;
+    }
+
+    .btn-apple:hover {
+      background: #0077ed;
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Section Headings */
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header p {
+      color: var(--text-sub);
+      font-size: 1rem;
+      margin-top: 0.4rem;
+    }
+
+    /* Bento Grid (Apple Style) */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .bento-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.2rem;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      justify-content: space-between;
     }
 
-    .timeline-item {
-      background: var(--card-bg);
-      border-left: 3px solid var(--accent);
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 1.2rem;
-      border-radius: 0 8px 8px 0;
+    .bento-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
 
-    .timeline-item h3 {
-      color: var(--heading);
-      font-size: 1rem;
-      margin-bottom: 0.2rem;
-    }
+    .col-8 { grid-column: span 8; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: span 12; }
 
-    .timeline-item span {
-      font-size: 0.8rem;
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       color: var(--accent);
-      font-family: 'Fira Code', monospace;
-      display: block;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
 
-    .timeline-item p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
+    .bento-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.8rem;
+    }
+
+    .bento-card p {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    /* Interactive Hardware Terminal Box */
+    .terminal-container {
+      background: #09090b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #38ef7d;
+      margin-top: 1.5rem;
+      line-height: 1.6;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    }
+
+    .terminal-header {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 0.8rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    /* Tags */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .pill {
+      background: var(--pill-bg);
+      border: 1px solid var(--card-border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 980px;
+      font-size: 0.8rem;
+      color: #d1d1d6;
+    }
+
+    /* Number Highlight Stats (Samsung/Apple presentation style) */
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.5rem;
     }
 
     /* Footer */
     footer {
+      border-top: 1px solid var(--card-border);
+      padding: 3rem 1.5rem;
       text-align: center;
-      padding: 2.5rem 1.5rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
+      color: var(--text-sub);
       font-size: 0.85rem;
     }
 
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.1rem; }
+    @media (max-width: 850px) {
+      .hero h1 { font-size: 2.8rem; }
+      .col-8, .col-4, .col-6 { grid-column: span 12; }
       .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <div class="glow-orb"></div>
+
+  <!-- Floating Island Navigation -->
   <header>
     <nav>
-      <div class="logo">&lt;Srikar /&gt;</div>
+      <div class="nav-logo">Sai Srikar</div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Achievements</a></li>
+        <li><a href="#work">Projects</a></li>
+        <li><a href="#skills">Architecture</a></li>
       </ul>
+      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" class="btn btn-apple" style="padding: 0.45rem 1rem; font-size: 0.8rem;">Contact</a>
     </nav>
   </header>
 
   <div class="container">
+    
     <!-- Hero Section -->
     <section class="hero" id="about">
-      <h1>Uppu Sai Srikar</h1>
-      <div class="tagline">Embedded Systems & Firmware Enthusiast | C/C++ Developer</div>
+      <div class="hero-badge">Embedded Systems & Firmware Engineering</div>
+      <h1>Direct to Silicon.<br>Optimized to the Core.</h1>
       <p>
-        Focused on microcontrollers, bare-metal C programming, low-level architecture, and high-performance software problem solving. Eager to engineer reliable and resource-constrained embedded solutions.
+        Building ultra-lean bare-metal drivers, instruction set emulators, and high-reliability embedded firmware engineered with precision in C and C++.
       </p>
-      <div class="hero-cta">
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
-        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn btn-secondary">View GitHub</a>
+      <div class="cta-group">
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" class="btn btn-apple">View LinkedIn Profile</a>
+        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn btn-glass">GitHub Projects &rarr;</a>
       </div>
     </section>
 
-    <!-- Technical Skills -->
+    <!-- Bento Grid Work Showcase -->
+    <section id="work">
+      <div class="section-header">
+        <h2>Engineering Highlights</h2>
+        <p>Architected for performance, low memory footprints, and bare-metal execution.</p>
+      </div>
+
+      <div class="bento-grid">
+        
+        <!-- Large Card 1: CHIP-8 Emulator -->
+        <div class="bento-card col-8">
+          <div>
+            <span class="card-tag">Systems Architecture</span>
+            <h3>CHIP-8 Virtual Machine & Emulator</h3>
+            <p>
+              A fully featured interpreter designed in C. Implements CPU fetch-decode-execute cycles, stack operations, 35 instructions, 16 8-bit registers, and real-time graphics buffering for classic ROMs.
+            </p>
+            <div class="terminal-container">
+              <div class="terminal-header">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div>[BOOT] Initializing CHIP-8 VM 64x32 monochrome buffer...</div>
+              <div>[CPU] 35 OpCodes decoded | PC: 0x0200 | Clock: 500Hz</div>
+              <div>[STATUS] Instruction cycle executing cleanly with 0% memory leakage.</div>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill">C</span>
+            <span class="pill">Virtual Machines</span>
+            <span class="pill">Instruction Decoding</span>
+            <span class="pill">Memory Management</span>
+          </div>
+        </div>
+
+        <!-- Metric / Stat Card 2 -->
+        <div class="bento-card col-4">
+          <div>
+            <span class="card-tag">Precision</span>
+            <div class="stat-number">32-Bit</div>
+            <h3>ARM7TDMI Architecture</h3>
+            <p>Hands-on bare-metal register programming on LPC2148 and LPC2129 microcontrollers without external vendor abstractions.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">Keil µVision</span>
+            <span class="pill">GPIO / Timers</span>
+            <span class="pill">UART & I2C</span>
+          </div>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="bento-card col-4">
+          <div>
+            <span class="card-tag">Recognition</span>
+            <div class="stat-number">Finalist</div>
+            <h3>Road Safety Hackathon</h3>
+            <p>Recognized nationally by HOA(I) & NHAI for building intelligent hardware safety innovations targeting zero-delay hazard prevention.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">NHAI Finalist</span>
+            <span class="pill">IoT & Firmware</span>
+          </div>
+        </div>
+
+        <!-- Large Card 4: Hardware Driver Development -->
+        <div class="bento-card col-8">
+          <div>
+            <span class="card-tag">Low-Level Firmware</span>
+            <h3>Bare-Metal Peripheral Drivers</h3>
+            <p>
+              Developed direct register-level drivers for alphanumeric LCDs (16x2), UART telemetry, and interrupt service routines (ISR) on ARM-based hardware to maximize determinism and responsiveness.
+            </p>
+          </div>
+          <div class="pills">
+            <span class="pill">Embedded C</span>
+            <span class="pill">Interrupt Service Routines (VIC)</span>
+            <span class="pill">Bit Manipulation</span>
+            <span class="pill">Oscilloscopes & Logic Probes</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Arsenal (Bento 2) -->
     <section id="skills">
-      <h2>Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>Languages</h3>
-          <div class="skill-tags">
-            <span class="tag">C (Bare-Metal)</span>
-            <span class="tag">C++</span>
-            <span class="tag">Assembly (Basics)</span>
-            <span class="tag">Python</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <h3>Hardware & Microcontrollers</h3>
-          <div class="skill-tags">
-            <span class="tag">ARM7 (LPC2148 / LPC2129)</span>
-            <span class="tag">GPIO / UART / I2C / SPI</span>
-            <span class="tag">Timers & PWM</span>
-            <span class="tag">ADC / DAC</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <h3>Core Concepts</h3>
-          <div class="skill-tags">
-            <span class="tag">Data Structures & Algorithms</span>
-            <span class="tag">Bit Manipulation</span>
-            <span class="tag">Pointers & Memory Mgmt</span>
-            <span class="tag">Operating Systems Basics</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <h3>Tools & Environments</h3>
-          <div class="skill-tags">
-            <span class="tag">Keil µVision</span>
-            <span class="tag">QEMU</span>
-            <span class="tag">Git & GitHub</span>
-            <span class="tag">Linux CLI</span>
-          </div>
-        </div>
+      <div class="section-header">
+        <h2>Technical Specification</h2>
+        <p>Core toolchain and low-level development stack.</p>
       </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2>Featured Projects</h2>
-      <div class="project-grid">
-
-        <!-- Project 1 -->
-        <div class="project-card">
-          <div>
-            <h3>CHIP-8 Virtual Machine / Emulator</h3>
-            <p>
-              Developed an interpreter/emulator for the CHIP-8 instruction set in C/C++. Emulated CPU fetch-decode-execute cycle, 35 opcodes, registers, timers, 64x32 monochrome display buffer, and keypad inputs.
-            </p>
-          </div>
-          <div class="project-footer">
-            <div class="skill-tags">
-              <span class="tag">C</span>
-              <span class="tag">Emulation</span>
-              <span class="tag">Computer Architecture</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/YOUR_GITHUB_USERNAME/chip8-emulator" target="_blank">Source Code &rarr;</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card">
-          <div>
-            <h3>LPC2148 Peripheral Driver Suite</h3>
-            <p>
-              Wrote bare-metal firmware drivers for ARM7-based LPC2148 microcontroller without heavy vendor HAL libraries. Implemented 16x2 LCD interface, UART communication, and interrupt handling via Keil and hardware flashing.
-            </p>
-          </div>
-          <div class="project-footer">
-            <div class="skill-tags">
-              <span class="tag">Embedded C</span>
-              <span class="tag">ARM7</span>
-              <span class="tag">Keil</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank">Source Code &rarr;</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project-card">
-          <div>
-            <h3>Road Safety Hackathon Solution</h3>
-            <p>
-              Engineered an innovative safety system presented at the finale of the national-level Road Safety Hackathon organized by HOA(I) and NHAI, tackling road accident mitigation.
-            </p>
-          </div>
-          <div class="project-footer">
-            <div class="skill-tags">
-              <span class="tag">Embedded Hardware</span>
-              <span class="tag">IoT / Sensors</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank">Documentation &rarr;</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Experience & Milestones -->
-    <section id="experience">
-      <h2>Milestones & Training</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <h3>Advanced Embedded Systems Training — Vector India</h3>
-          <span>Hyderabad</span>
+      <div class="bento-grid">
+        <div class="bento-card col-6">
+          <span class="card-tag">Core Languages</span>
+          <h3>C & Embedded C</h3>
           <p>
-            In-depth hands-on training focusing on Embedded C, Data Structures, Microcontroller Peripherals (ARM / 8051), Linux internals, and device driver concepts.
+            Pointer arithmetic, memory layouts, memory mapped I/O, bitwise masking, volatile qualifier management, and algorithmic optimization.
           </p>
+          <div class="pills">
+            <span class="pill">C (ISO C99/C11)</span>
+            <span class="pill">C++</span>
+            <span class="pill">Assembly (ARM Core)</span>
+            <span class="pill">Python</span>
+          </div>
         </div>
-        <div class="timeline-item">
-          <h3>National Finalist — Road Safety Hackathon</h3>
-          <span>HOA(I) & National Highways Authority of India (NHAI)</span>
+
+        <div class="bento-card col-6">
+          <span class="card-tag">Ecosystem & Platforms</span>
+          <h3>Microcontroller Toolchain</h3>
           <p>
-            Reached the grand finale round evaluating technical solutions to enhance highway intelligence and driver safety.
+            Extensive practice with simulation and hardware testing across development boards, emulators, and debugging environments.
           </p>
+          <div class="pills">
+            <span class="pill">LPC2148 / LPC2129</span>
+            <span class="pill">QEMU Simulation</span>
+            <span class="pill">Keil IDE</span>
+            <span class="pill">Vector India Certified</span>
+          </div>
         </div>
       </div>
     </section>
+
   </div>
 
   <footer>
-    <p>&copy; 2026 Uppu Sai Srikar. Built with clean HTML & CSS.</p>
+    <p>&copy; 2026 Uppu Sai Srikar. Built with clean, minimalist design principles.</p>
   </footer>
 
 </body>
