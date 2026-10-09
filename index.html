@@ -6,18 +6,22 @@
   <title>Sai Srikar | Embedded Systems & Firmware Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display,-apple-system,BlinkMacSystemFont,Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg: #000000;
-      --card-bg: rgba(22, 22, 24, 0.75);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --card-hover-border: rgba(255, 255, 255, 0.35);
-      --accent: #2997ff;
-      --accent-glow: rgba(41, 151, 255, 0.35);
-      --text-main: #f5f5f7;
-      --text-sub: #86868b;
-      --pill-bg: rgba(255, 255, 255, 0.06);
+      --bg: #07090e;
+      --surface: rgba(14, 18, 27, 0.75);
+      --surface-elevated: rgba(22, 28, 42, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(0, 240, 255, 0.4);
+      --accent: #00f0ff;
+      --accent-rgb: 0, 240, 255;
+      --accent-amber: #ffb830;
+      --accent-emerald: #00ff88;
+      --text: #f0f4f8;
+      --text-muted: #8391a5;
+      --font-code: 'JetBrains Mono', monospace;
     }
 
     * {
@@ -29,54 +33,72 @@
 
     body {
       background-color: var(--bg);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    /* Ambient Background Glow */
-    .glow-orb {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, rgba(138, 43, 226, 0.08) 50%, rgba(0, 0, 0, 0) 80%);
-      filter: blur(80px);
+    /* Ambient Background Silicon Canvas */
+    #silicon-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
       pointer-events: none;
     }
 
-    /* Floating Apple-style Navigation */
+    /* Navbar */
     header {
-      position: sticky;
-      top: 16px;
-      z-index: 100;
+      position: fixed;
+      top: 20px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       display: flex;
       justify-content: center;
-      padding: 0 1rem;
+      padding: 0 1.5rem;
     }
 
     nav {
-      background: rgba(22, 22, 24, 0.7);
+      background: rgba(10, 14, 23, 0.8);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid var(--card-border);
-      border-radius: 980px;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
       padding: 0.6rem 1.6rem;
       display: flex;
       align-items: center;
-      gap: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      gap: 2.2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .nav-logo {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-code);
       font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     .nav-links {
@@ -86,127 +108,112 @@
     }
 
     .nav-links a {
-      color: var(--text-sub);
+      color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 400;
-      transition: color 0.2s;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--text-main);
+      color: var(--accent);
     }
 
-    /* Layout Container */
+    /* Container */
     .container {
-      max-width: 1080px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+      padding: 7rem 1.5rem 3rem;
       position: relative;
       z-index: 1;
     }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
       text-align: center;
-      padding: 5rem 0 4rem;
+      padding: 4rem 0 5rem;
     }
 
-    .hero-badge {
-      display: inline-block;
-      padding: 0.35rem 1rem;
-      background: var(--pill-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 980px;
+    .chip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 9999px;
+      font-family: var(--font-code);
       font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.5rem;
-      font-weight: 600;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .hero h1 {
-      font-size: 4.2rem;
+      font-size: 4.5rem;
       font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      background: linear-gradient(180deg, #ffffff 30%, #86868b 100%);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #ffffff 40%, #7d8ea5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1.2rem;
     }
 
     .hero p {
-      max-width: 620px;
+      max-width: 680px;
       margin: 0 auto 2.5rem;
       font-size: 1.25rem;
-      line-height: 1.5;
-      color: var(--text-sub);
+      color: var(--text-muted);
       font-weight: 400;
     }
 
-    .cta-group {
+    .btn-group {
       display: flex;
       justify-content: center;
       gap: 1rem;
     }
 
     .btn {
-      padding: 0.8rem 1.8rem;
-      border-radius: 980px;
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      cursor: pointer;
     }
 
-    .btn-apple {
-      background: #0071e3;
-      color: #fff;
+    .btn-primary {
+      background: #00f0ff;
+      color: #040911;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
     }
 
-    .btn-apple:hover {
-      background: #0077ed;
-      box-shadow: 0 0 25px var(--accent-glow);
+    .btn-primary:hover {
+      background: #73f7ff;
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.5);
     }
 
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      border: 1px solid var(--border);
       backdrop-filter: blur(10px);
     }
 
-    .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
     }
 
-    /* Section Headings */
-    .section-header {
-      margin-bottom: 2rem;
-    }
-
-    .section-header h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section-header p {
-      color: var(--text-sub);
-      font-size: 1rem;
-      margin-top: 0.4rem;
-    }
-
-    /* Bento Grid (Apple Style) */
+    /* Grid Framework */
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -214,140 +221,305 @@
       margin-bottom: 5rem;
     }
 
-    .bento-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
       padding: 2.2rem;
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
     }
 
-    .bento-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--card-hover-border);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    .card:hover {
+      border-color: var(--border-focus);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      transform: translateY(-3px);
     }
 
-    .col-8 { grid-column: span 8; }
-    .col-4 { grid-column: span 4; }
-    .col-6 { grid-column: span 6; }
     .col-12 { grid-column: span 12; }
+    .col-8 { grid-column: span 8; }
+    .col-7 { grid-column: span 7; }
+    .col-5 { grid-column: span 5; }
+    .col-6 { grid-column: span 6; }
+    .col-4 { grid-column: span 4; }
 
-    .card-tag {
+    .card-label {
+      font-family: var(--font-code);
       font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
     }
 
-    .bento-card h3 {
+    .card-title {
       font-size: 1.6rem;
       font-weight: 700;
-      letter-spacing: -0.015em;
       margin-bottom: 0.8rem;
+      letter-spacing: -0.02em;
     }
 
-    .bento-card p {
-      color: var(--text-sub);
-      font-size: 0.95rem;
-      line-height: 1.55;
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      margin-bottom: 1.4rem;
     }
 
-    /* Interactive Hardware Terminal Box */
-    .terminal-container {
-      background: #09090b;
+    /* CHIP-8 Live Emulator Box */
+    .terminal-box {
+      background: #04060a;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
       padding: 1.2rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #38ef7d;
-      margin-top: 1.5rem;
-      line-height: 1.6;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+      font-family: var(--font-code);
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
+      position: relative;
     }
 
-    .terminal-header {
+    .terminal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .window-dots {
       display: flex;
       gap: 6px;
-      margin-bottom: 0.8rem;
     }
 
-    .dot {
+    .w-dot {
       width: 10px;
       height: 10px;
       border-radius: 50%;
     }
-    .dot-red { background: #ff5f56; }
-    .dot-yellow { background: #ffbd2e; }
-    .dot-green { background: #27c93f; }
+    .w-red { background: #ff5f56; }
+    .w-yellow { background: #ffbd2e; }
+    .w-green { background: #27c93f; }
 
-    /* Tags */
-    .pills {
+    .terminal-screen {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
+      gap: 1.2rem;
+      align-items: center;
     }
 
-    .pill {
-      background: var(--pill-bg);
-      border: 1px solid var(--card-border);
-      padding: 0.35rem 0.8rem;
-      border-radius: 980px;
-      font-size: 0.8rem;
-      color: #d1d1d6;
+    #chip8-canvas {
+      background: #000;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 6px;
+      width: 160px;
+      height: 80px;
+      image-rendering: pixelated;
     }
 
-    /* Number Highlight Stats (Samsung/Apple presentation style) */
-    .stat-number {
-      font-size: 3.5rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 0.5rem;
+    .terminal-logs {
+      font-size: 0.78rem;
+      color: #5af78e;
+      flex-grow: 1;
+      line-height: 1.7;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--card-border);
-      padding: 3rem 1.5rem;
-      text-align: center;
-      color: var(--text-sub);
+    .terminal-logs span {
+      color: #687d99;
+    }
+
+    /* Bitwise Register Interactive Widget */
+    .register-widget {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin: 1.2rem 0;
+    }
+
+    .register-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      font-family: var(--font-code);
       font-size: 0.85rem;
     }
 
-    @media (max-width: 850px) {
+    .bit-strip {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0.4rem;
+    }
+
+    .bit-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 0.5rem 0.2rem;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+
+    .bit-box:hover {
+      border-color: var(--accent);
+    }
+
+    .bit-box.active {
+      background: rgba(0, 240, 255, 0.18);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    .bit-val {
+      font-family: var(--font-code);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .bit-box.active .bit-val {
+      color: var(--accent);
+    }
+
+    .bit-idx {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      font-family: var(--font-code);
+    }
+
+    /* Signal Oscilloscope */
+    .scope-box {
+      margin-top: 1rem;
+      background: #020408;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .scope-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .scope-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font-code);
+      transition: all 0.2s;
+    }
+
+    .scope-btn.active, .scope-btn:hover {
+      background: var(--accent);
+      color: #040911;
+      font-weight: 600;
+    }
+
+    #scope-canvas {
+      width: 100%;
+      height: 90px;
+      background: #000;
+      border-radius: 6px;
+    }
+
+    /* Tags / Pills */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      font-family: var(--font-code);
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.2rem;
+    }
+
+    /* Stats Display */
+    .metric-number {
+      font-size: 3.6rem;
+      font-weight: 800;
+      font-family: var(--font-code);
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .highlight-gold {
+      background: linear-gradient(135deg, #ffdc69 0%, #fa709a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 900px) {
       .hero h1 { font-size: 2.8rem; }
-      .col-8, .col-4, .col-6 { grid-column: span 12; }
+      .col-8, .col-7, .col-5, .col-6, .col-4 { grid-column: span 12; }
       .nav-links { display: none; }
+      .terminal-screen { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <div class="glow-orb"></div>
+  <!-- Dynamic Silicon Interconnect Canvas -->
+  <canvas id="silicon-canvas"></canvas>
 
-  <!-- Floating Island Navigation -->
+  <!-- Sticky Pill Navigation -->
   <header>
     <nav>
-      <div class="nav-logo">Sai Srikar</div>
+      <a href="#about" class="brand">
+        <span class="status-dot"></span>
+        <span>SAI_SRIKAR.o</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#work">Projects</a></li>
-        <li><a href="#skills">Architecture</a></li>
+        <li><a href="#projects">Hardware & Projects</a></li>
+        <li><a href="#registers">Registers Lab</a></li>
+        <li><a href="#stack">Architecture</a></li>
       </ul>
-      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" class="btn btn-apple" style="padding: 0.45rem 1rem; font-size: 0.8rem;">Contact</a>
+      <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" class="btn btn-primary" style="padding: 0.45rem 1.1rem; font-size: 0.82rem;">Connect</a>
     </nav>
   </header>
 
@@ -355,135 +527,173 @@
     
     <!-- Hero Section -->
     <section class="hero" id="about">
-      <div class="hero-badge">Embedded Systems & Firmware Engineering</div>
-      <h1>Direct to Silicon.<br>Optimized to the Core.</h1>
+      <div class="chip-badge">
+        <span>⚡</span> Bare-Metal & Firmware Engineering
+      </div>
+      <h1>Direct to Silicon.<br>Clock-Cycle Precision.</h1>
       <p>
-        Building ultra-lean bare-metal drivers, instruction set emulators, and high-reliability embedded firmware engineered with precision in C and C++.
+        Building lean bare-metal drivers, instruction set emulators, and high-reliability embedded firmware engineered in C, C++, and Assembly.
       </p>
-      <div class="cta-group">
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME" target="_blank" class="btn btn-apple">View LinkedIn Profile</a>
-        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn btn-glass">GitHub Projects &rarr;</a>
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">Inspect Systems &darr;</a>
+        <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="btn btn-outline">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub Repositories
+        </a>
       </div>
     </section>
 
-    <!-- Bento Grid Work Showcase -->
-    <section id="work">
-      <div class="section-header">
-        <h2>Engineering Highlights</h2>
-        <p>Architected for performance, low memory footprints, and bare-metal execution.</p>
-      </div>
+    <!-- Bento Grid Showcase -->
+    <section id="projects">
+      <h2 class="section-title">Engineering Highlights</h2>
+      <p class="section-subtitle">Systems designed for strict deterministic timing and zero memory leakage.</p>
 
       <div class="bento-grid">
         
-        <!-- Large Card 1: CHIP-8 Emulator -->
-        <div class="bento-card col-8">
-          <div>
-            <span class="card-tag">Systems Architecture</span>
-            <h3>CHIP-8 Virtual Machine & Emulator</h3>
-            <p>
-              A fully featured interpreter designed in C. Implements CPU fetch-decode-execute cycles, stack operations, 35 instructions, 16 8-bit registers, and real-time graphics buffering for classic ROMs.
-            </p>
-            <div class="terminal-container">
-              <div class="terminal-header">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-green"></span>
+        <!-- Live CHIP-8 Emulator Card -->
+        <div class="card col-8">
+          <span class="card-label">Virtual Machine Architecture</span>
+          <h3 class="card-title">CHIP-8 Virtual Machine & Emulator</h3>
+          <p class="card-desc">
+            Complete interpreter written in standard C. Implements CPU fetch-decode-execute cycles, system stack, 35 instructions, 16 8-bit registers, timer delay registers, and 64×32 monochrome frame buffering.
+          </p>
+
+          <div class="terminal-box">
+            <div class="terminal-bar">
+              <div class="window-dots">
+                <span class="w-dot w-red"></span>
+                <span class="w-dot w-yellow"></span>
+                <span class="w-dot w-green"></span>
               </div>
-              <div>[BOOT] Initializing CHIP-8 VM 64x32 monochrome buffer...</div>
-              <div>[CPU] 35 OpCodes decoded | PC: 0x0200 | Clock: 500Hz</div>
-              <div>[STATUS] Instruction cycle executing cleanly with 0% memory leakage.</div>
+              <span style="font-size:0.75rem; color:#8391a5;">CHIP8_CORE.c (Simulated)</span>
+            </div>
+            <div class="terminal-screen">
+              <canvas id="chip8-canvas" width="64" height="32"></canvas>
+              <div class="terminal-logs">
+                <div>[STATUS] <span id="chip8-status">FETCH -> DECODE -> EXECUTE</span></div>
+                <div>[OPCODE] <span id="chip8-opcode">0x00E0 (CLS)</span> | PC: <span id="chip8-pc">0x0200</span></div>
+                <div>[FREQ] <span style="color:#00f0ff;">500 Hz Cycle Lock</span> | Stack Depth: 16</div>
+              </div>
             </div>
           </div>
-          <div class="pills">
-            <span class="pill">C</span>
-            <span class="pill">Virtual Machines</span>
-            <span class="pill">Instruction Decoding</span>
-            <span class="pill">Memory Management</span>
+
+          <div class="tag-cloud" style="margin-top: 1.5rem;">
+            <span class="tag">C (ISO C99)</span>
+            <span class="tag">Virtual Machines</span>
+            <span class="tag">Opcode Decoding</span>
+            <span class="tag">Memory Layout</span>
           </div>
         </div>
 
-        <!-- Metric / Stat Card 2 -->
-        <div class="bento-card col-4">
-          <div>
-            <span class="card-tag">Precision</span>
-            <div class="stat-number">32-Bit</div>
-            <h3>ARM7TDMI Architecture</h3>
-            <p>Hands-on bare-metal register programming on LPC2148 and LPC2129 microcontrollers without external vendor abstractions.</p>
-          </div>
-          <div class="pills">
-            <span class="pill">Keil µVision</span>
-            <span class="pill">GPIO / Timers</span>
-            <span class="pill">UART & I2C</span>
+        <!-- Metric Stat 1 -->
+        <div class="card col-4">
+          <span class="card-label">Silicon Focus</span>
+          <div class="metric-number">32-Bit</div>
+          <h3 class="card-title">ARM7TDMI Core</h3>
+          <p class="card-desc">Direct register-level manipulation on LPC2148 / LPC2129 microcontrollers without high-level vendor abstractions.</p>
+          <div class="tag-cloud">
+            <span class="tag">Keil µVision</span>
+            <span class="tag">GPIO / Timers</span>
+            <span class="tag">UART / I2C</span>
           </div>
         </div>
 
-        <!-- Stat Card 3 -->
-        <div class="bento-card col-4">
-          <div>
-            <span class="card-tag">Recognition</span>
-            <div class="stat-number">Finalist</div>
-            <h3>Road Safety Hackathon</h3>
-            <p>Recognized nationally by HOA(I) & NHAI for building intelligent hardware safety innovations targeting zero-delay hazard prevention.</p>
-          </div>
-          <div class="pills">
-            <span class="pill">NHAI Finalist</span>
-            <span class="pill">IoT & Firmware</span>
+        <!-- Metric Stat 2 -->
+        <div class="card col-5">
+          <span class="card-label">Recognition</span>
+          <div class="metric-number highlight-gold">Finalist</div>
+          <h3 class="card-title">NHAI Road Safety Hackathon</h3>
+          <p class="card-desc">Recognized nationally by HOA(I) & NHAI for intelligent firmware innovations targeting zero-latency hardware hazard detection.</p>
+          <div class="tag-cloud">
+            <span class="tag">NHAI National Finalist</span>
+            <span class="tag">Embedded Telemetry</span>
           </div>
         </div>
 
-        <!-- Large Card 4: Hardware Driver Development -->
-        <div class="bento-card col-8">
-          <div>
-            <span class="card-tag">Low-Level Firmware</span>
-            <h3>Bare-Metal Peripheral Drivers</h3>
-            <p>
-              Developed direct register-level drivers for alphanumeric LCDs (16x2), UART telemetry, and interrupt service routines (ISR) on ARM-based hardware to maximize determinism and responsiveness.
-            </p>
+        <!-- Oscilloscope Waveform Card -->
+        <div class="card col-7">
+          <span class="card-label">Hardware Logic Analysis</span>
+          <h3 class="card-title">Bare-Metal Peripheral Drivers</h3>
+          <p class="card-desc">
+            Implemented interrupt service routines (Vectored Interrupt Controller), UART communication protocols, and character LCD drivers with tight timing constraints.
+          </p>
+
+          <div class="scope-box">
+            <div class="scope-controls">
+              <button class="scope-btn active" onclick="setWaveform('uart')">UART (8-N-1)</button>
+              <button class="scope-btn" onclick="setWaveform('spi')">SPI Bus</button>
+              <button class="scope-btn" onclick="setWaveform('clk')">Clock (PWM)</button>
+            </div>
+            <canvas id="scope-canvas"></canvas>
           </div>
-          <div class="pills">
-            <span class="pill">Embedded C</span>
-            <span class="pill">Interrupt Service Routines (VIC)</span>
-            <span class="pill">Bit Manipulation</span>
-            <span class="pill">Oscilloscopes & Logic Probes</span>
+
+          <div class="tag-cloud" style="margin-top: 1.2rem;">
+            <span class="tag">Embedded C</span>
+            <span class="tag">Interrupt Latency</span>
+            <span class="tag">VIC Registers</span>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Technical Arsenal (Bento 2) -->
-    <section id="skills">
-      <div class="section-header">
-        <h2>Technical Specification</h2>
-        <p>Core toolchain and low-level development stack.</p>
-      </div>
+    <!-- Interactive Register Playground -->
+    <section id="registers">
+      <h2 class="section-title">Hardware Register Inspector</h2>
+      <p class="section-subtitle">Click bit positions to manipulate and calculate hardware registers in real-time.</p>
 
       <div class="bento-grid">
-        <div class="bento-card col-6">
-          <span class="card-tag">Core Languages</span>
-          <h3>C & Embedded C</h3>
-          <p>
-            Pointer arithmetic, memory layouts, memory mapped I/O, bitwise masking, volatile qualifier management, and algorithmic optimization.
+        <div class="card col-12">
+          <div class="register-header">
+            <div><strong>TARGET_REGISTER:</strong> <span style="color:var(--accent);">IO0DIR (LPC2148 GPIO Port 0 Direction)</span></div>
+            <div>HEX VALUE: <strong id="reg-hex" style="color:var(--accent); font-size:1.1rem;">0x00</strong></div>
+          </div>
+
+          <div class="register-widget">
+            <div class="bit-strip" id="bit-strip">
+              <!-- Bits dynamically generated via JS -->
+            </div>
+          </div>
+
+          <div style="font-family: var(--font-code); font-size: 0.85rem; color: var(--text-muted); display:flex; justify-content: space-between; flex-wrap:wrap; gap:1rem;">
+            <div>Status: <span id="reg-desc" style="color:#fff;">All Pins Initialized as INPUT (High-Z)</span></div>
+            <div>Active Mask: <span id="reg-binary" style="color:var(--accent);">0b00000000</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Architecture -->
+    <section id="stack">
+      <h2 class="section-title">Technical Specification</h2>
+      <p class="section-subtitle">Low-level toolchain and engineering stack.</p>
+
+      <div class="bento-grid">
+        <div class="card col-6">
+          <span class="card-label">Core Languages</span>
+          <h3 class="card-title">C & Low-Level Architecture</h3>
+          <p class="card-desc">
+            Bitwise masking, memory-mapped I/O, volatile pointers, linker scripts, stack-frame inspection, and execution cycle optimization.
           </p>
-          <div class="pills">
-            <span class="pill">C (ISO C99/C11)</span>
-            <span class="pill">C++</span>
-            <span class="pill">Assembly (ARM Core)</span>
-            <span class="pill">Python</span>
+          <div class="tag-cloud">
+            <span class="tag">C (ISO C99/C11)</span>
+            <span class="tag">C++</span>
+            <span class="tag">ARM Assembly</span>
+            <span class="tag">Python (Automation)</span>
           </div>
         </div>
 
-        <div class="bento-card col-6">
-          <span class="card-tag">Ecosystem & Platforms</span>
-          <h3>Microcontroller Toolchain</h3>
-          <p>
-            Extensive practice with simulation and hardware testing across development boards, emulators, and debugging environments.
+        <div class="card col-6">
+          <span class="card-label">Hardware & Toolchain</span>
+          <h3 class="card-title">Microcontrollers & Debuggers</h3>
+          <p class="card-desc">
+            Hardware emulation, register programming, and lab diagnostics using oscilloscopes and logic analyzers.
           </p>
-          <div class="pills">
-            <span class="pill">LPC2148 / LPC2129</span>
-            <span class="pill">QEMU Simulation</span>
-            <span class="pill">Keil IDE</span>
-            <span class="pill">Vector India Certified</span>
+          <div class="tag-cloud">
+            <span class="tag">LPC2148 / LPC2129</span>
+            <span class="tag">Keil µVision</span>
+            <span class="tag">QEMU Emulation</span>
+            <span class="tag">Vector India Certified</span>
           </div>
         </div>
       </div>
@@ -495,5 +705,256 @@
     <p>&copy; 2026 Uppu Sai Srikar. Built with clean, minimalist design principles.</p>
   </footer>
 
+  <script>
+    /* =========================================================
+       1. Ambient Silicon Canvas Interconnect Animation
+       ========================================================= */
+    const canvas = document.getElementById('silicon-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const nodes = [];
+    const nodeCount = Math.min(width > 768 ? 60 : 30, 75);
+
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2 + 1
+      });
+    }
+
+    let mouse = { x: -1000, y: -1000 };
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    function drawSiliconCanvas() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Connect nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const n1 = nodes[i];
+        n1.x += n1.vx;
+        n1.y += n1.vy;
+
+        if (n1.x < 0 || n1.x > width) n1.vx *= -1;
+        if (n1.y < 0 || n1.y > height) n1.vy *= -1;
+
+        // Draw node
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.3)';
+        ctx.fillRect(n1.x, n1.y, n1.size, n1.size);
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j];
+          const dist = Math.hypot(n1.x - n2.x, n1.y - n2.y);
+          if (dist < 130) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.12 * (1 - dist / 130)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(n1.x, n1.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.stroke();
+          }
+        }
+
+        // Mouse proximity connection
+        const mouseDist = Math.hypot(n1.x - mouse.x, n1.y - mouse.y);
+        if (mouseDist < 160) {
+          ctx.strokeStyle = `rgba(0, 240, 255, ${0.35 * (1 - mouseDist / 160)})`;
+          ctx.beginPath();
+          ctx.moveTo(n1.x, n1.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(drawSiliconCanvas);
+    }
+    drawSiliconCanvas();
+
+    /* =========================================================
+       2. Real-Time CHIP-8 Live Display Simulator
+       ========================================================= */
+    const chipCanvas = document.getElementById('chip8-canvas');
+    const chipCtx = chipCanvas.getContext('2d');
+    const opcodes = ['0x1200 (JMP)', '0x6A02 (LD V0)', '0x7A01 (ADD)', '0xD015 (DRW)', '0x00EE (RET)'];
+    let opIndex = 0;
+
+    // Simulate simple 64x32 monochrome buffer graphics
+    function renderChip8Buffer() {
+      chipCtx.fillStyle = '#000';
+      chipCtx.fillRect(0, 0, 64, 32);
+
+      chipCtx.fillStyle = '#00f0ff';
+      // Draw pixelated simulated invader / test sprite
+      const t = Date.now() * 0.003;
+      const shiftX = Math.floor(Math.sin(t) * 12) + 24;
+      
+      const sprite = [
+        [0,1,1,0,0,1,1,0],
+        [1,1,1,1,1,1,1,1],
+        [1,0,1,1,1,1,0,1],
+        [1,0,0,1,1,0,0,1],
+        [0,0,1,0,0,1,0,0]
+      ];
+
+      for (let r = 0; r < sprite.length; r++) {
+        for (let c = 0; c < sprite[r].length; c++) {
+          if (sprite[r][c]) {
+            chipCtx.fillRect(shiftX + c, 12 + r, 1, 1);
+          }
+        }
+      }
+
+      // Add a couple of simulated phosphor sparks
+      if (Math.random() > 0.4) {
+        chipCtx.fillRect(Math.floor(Math.random() * 64), Math.floor(Math.random() * 32), 1, 1);
+      }
+    }
+
+    setInterval(() => {
+      renderChip8Buffer();
+      // Tick opcode simulation logs
+      opIndex = (opIndex + 1) % opcodes.length;
+      document.getElementById('chip8-opcode').innerText = opcodes[opIndex];
+      document.getElementById('chip8-pc').innerText = '0x' + (0x0200 + (opIndex * 2)).toString(16).toUpperCase();
+    }, 450);
+
+    /* =========================================================
+       3. Interactive Register Bit-Mask Inspector
+       ========================================================= */
+    const bitStrip = document.getElementById('bit-strip');
+    const bitStates = [0, 0, 0, 0, 0, 0, 0, 0]; // 8 bits
+
+    for (let i = 7; i >= 0; i--) {
+      const bitBox = document.createElement('div');
+      bitBox.className = 'bit-box';
+      bitBox.dataset.index = i;
+      bitBox.innerHTML = `
+        <div class="bit-val">0</div>
+        <div class="bit-idx">P0.${i}</div>
+      `;
+      bitBox.addEventListener('click', () => toggleBit(i, bitBox));
+      bitStrip.appendChild(bitBox);
+    }
+
+    function toggleBit(index, element) {
+      bitStates[index] = bitStates[index] === 0 ? 1 : 0;
+      element.classList.toggle('active', bitStates[index] === 1);
+      element.querySelector('.bit-val').innerText = bitStates[index];
+
+      // Calculate hex
+      let num = 0;
+      for (let i = 0; i < 8; i++) {
+        if (bitStates[i] === 1) num += Math.pow(2, i);
+      }
+
+      const hex = '0x' + num.toString(16).padStart(2, '0').toUpperCase();
+      const binary = '0b' + bitStates.slice().reverse().join('');
+
+      document.getElementById('reg-hex').innerText = hex;
+      document.getElementById('reg-binary').innerText = binary;
+
+      const desc = document.getElementById('reg-desc');
+      if (num === 0) {
+        desc.innerText = 'All Pins Configured as INPUT (High-Z)';
+      } else {
+        const outPins = [];
+        bitStates.forEach((val, idx) => { if (val === 1) outPins.push(`P0.${idx}`); });
+        desc.innerText = `OUTPUT Mode set for: ${outPins.join(', ')}`;
+      }
+    }
+
+    /* =========================================================
+       4. Hardware Signal Logic Oscilloscope
+       ========================================================= */
+    const scopeCanvas = document.getElementById('scope-canvas');
+    const scopeCtx = scopeCanvas.getContext('2d');
+    let waveMode = 'uart';
+    let waveOffset = 0;
+
+    function resizeScope() {
+      scopeCanvas.width = scopeCanvas.parentElement.clientWidth - 32;
+      scopeCanvas.height = 90;
+    }
+    resizeScope();
+    window.addEventListener('resize', resizeScope);
+
+    function setWaveform(mode) {
+      waveMode = mode;
+      document.querySelectorAll('.scope-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function drawScope() {
+      const w = scopeCanvas.width;
+      const h = scopeCanvas.height;
+      scopeCtx.fillStyle = '#010408';
+      scopeCtx.fillRect(0, 0, w, h);
+
+      // Grid
+      scopeCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      scopeCtx.lineWidth = 1;
+      for (let x = 0; x < w; x += 30) {
+        scopeCtx.beginPath();
+        scopeCtx.moveTo(x, 0);
+        scopeCtx.lineTo(x, h);
+        scopeCtx.stroke();
+      }
+      for (let y = 0; y < h; y += 22) {
+        scopeCtx.beginPath();
+        scopeCtx.moveTo(0, y);
+        scopeCtx.lineTo(w, y);
+        scopeCtx.stroke();
+      }
+
+      // Waveform trace
+      scopeCtx.strokeStyle = '#00f0ff';
+      scopeCtx.shadowColor = '#00f0ff';
+      scopeCtx.shadowBlur = 8;
+      scopeCtx.lineWidth = 2;
+      scopeCtx.beginPath();
+
+      waveOffset += 2;
+      const highY = 22;
+      const lowY = 68;
+
+      for (let x = 0; x < w; x++) {
+        let y = highY;
+        const adjustedX = x + waveOffset;
+
+        if (waveMode === 'clk') {
+          y = (Math.floor(adjustedX / 24) % 2 === 0) ? highY : lowY;
+        } else if (waveMode === 'uart') {
+          // Packet simulation with start bit, data, stop bit
+          const step = Math.floor(adjustedX / 30) % 9;
+          y = (step === 0 || step === 3 || step === 5) ? lowY : highY;
+        } else if (waveMode === 'spi') {
+          const clkState = Math.floor(adjustedX / 12) % 2;
+          const dataBit = Math.floor(adjustedX / 48) % 2;
+          y = clkState ? (dataBit ? highY : lowY) : lowY + 10;
+        }
+
+        if (x === 0) scopeCtx.moveTo(x, y);
+        else scopeCtx.lineTo(x, y);
+      }
+
+      scopeCtx.stroke();
+      scopeCtx.shadowBlur = 0; // reset blur
+
+      requestAnimationFrame(drawScope);
+    }
+    drawScope();
+  </script>
 </body>
 </html>
